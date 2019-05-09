@@ -1,12 +1,63 @@
 <!DOCTYPE html>
-	<html>
+<html>
 	<head>
 		<title>listar pessoas</title>
 		<meta charset="utf-8">
 	</head>
+	<style type="text/css">
+			.tg  {
+				border-collapse:collapse;
+				border-spacing:0;
+			}
+			.tg td{
+				font-family:Arial, sans-serif;
+				font-size:14px;
+				padding:10px 5px;
+				border-style:solid;
+				border-width:1px;
+				overflow:hidden;
+				word-break:normal;
+				border-color:black;
+			}
+			.tg th{
+				font-family:Arial, sans-serif;
+				font-size:14px;
+				font-weight:normal;
+				padding:10px 5px;
+				border-style:solid;
+				border-width:1px;
+				overflow:hidden;
+				word-break:normal;
+				border-color:black;
+			}
+			.tg .tg-0lax{
+				text-align:left;
+				vertical-align:top
+			}
+	</style>
 	<body>
-		<p>para alterar pessoa clique<a href="form_alterar_pessoa.html"> aqui</a></p>
-		<p>para inserir pessoa clique<a href="form_inserir_pessoa.html"> aqui</a></p>
-		<p>para exibir mensagem clique<a href="exibir_mensagem.html"> aqui</a></p>
+		<p>para inserir pessoas clique<a href="/form_inserir_pessoa"> aqui</a></p>
+		<p>para alterar pessoas clique<a href="/form_alterar_pessoa"> aqui</a></p>
+		<a href="exibir_mensagem.html"></a>
+
+		<table class="tg">
+			<tr>
+				<th class="tg-olax" name="nome">Nome</th>
+				<th class="tg-olax" name="endereco">Endereço</th>
+				<th class="tg-olax" name="cpf">CPF</th>
+				<th class="tg-olax" name="inserir"><a href="/form_inserir_pessoa">inserir</a></th>
+			</tr>
+		{% for pessoa in lista: %}
+			<tr>
+				<td>{{pessoa.nome}}</td>
+				<td>{{pessoa.endereco}}</td>
+				<td>{{pessoa.cpf}}</td>
+				{% if session["usuario"]: %}
+					<td><a href="/form_excluir_pessoa?cpf={{pessoa.cpf}}">excluir</a></td>
+					<td><a href="/form_alterar_pessoa?cpf={{pessoa.cpf}}">alterar</a></td>
+				{% endif %}
+			</tr>
+		{% endfor %}
+		</table>
 	</body>
 </html>
